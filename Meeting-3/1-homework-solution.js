@@ -19,9 +19,9 @@ class Person {
 			car.removeOwner(this)
 		}
 
-		// this.getAllCarsInfo = (info) => {
-		// 	`${this.name} owns these cars: ${info.getCarInfo(this).join(', ')}`
-		// }
+		this.getAllCarsInfo = (info) => {
+			`${this.name} owns these cars: ${info.getCarInfo(this).join(', ')}`
+		}
 	}
 }
 
@@ -68,17 +68,17 @@ console.log({
   daniel: {
     fullName: daniel916.fullName(),
     countCars: daniel916.countCars(),
-    // getAllCarsInfo: daniel916.getAllCarsInfo(), // - არ მუშაობს (getCarInfo undefined)
+    getAllCarsInfo: daniel916.getAllCarsInfo(), // - არ მუშაობს (getCarInfo undefined)
   },
   elon: {
     fullName: ilona.fullName(),
     countCars: ilona.countCars(),
-    // getAllCarsInfo: ilona.getAllCarsInfo(), // - არ მუშაობს (getCarInfo undefined)
+    getAllCarsInfo: ilona.getAllCarsInfo(), // - არ მუშაობს (getCarInfo undefined)
   },
   duti_picoti: {
     getOwnersCount: duti_picoti.getOwnersCount(),
-    // getOwnerNames: duti_picoti.getOwnerNames(), // - stodevianosto-სგან განსხვავებით ეს აქ არ მუშაობს
-    // getFullInfo: duti_picoti.getFullInfo(), // - ანალოგიურად ესეც
+    getOwnerNames: duti_picoti.getOwnerNames(), // - stodevianosto-სგან განსხვავებით ეს აქ არ მუშაობს
+    getFullInfo: duti_picoti.getFullInfo(), // - ანალოგიურად ესეც
     getCarInfo: duti_picoti.getCarInfo(),
   },
   stodevianosto: {
