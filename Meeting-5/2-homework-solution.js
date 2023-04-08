@@ -6,20 +6,25 @@ const usersDB = {
   "user3@hw.js": [],
 };
 
-function loginUser(email, password, callback, errorMessage) {
-  setTimeout(
-		() => {
-			if (usersDB.includes(email)) {
-				console.log("Now we have the data of user: ", email)
-				callback({ userEmail: email })
-			}
-			else (errorMessage("User not found!"))
+function loginUser(email, password, callback, error) {
+	return new Promise(() => {
+  	setTimeout(
+			() => {
+				if (Object.keys(usersDB).includes(email)){
+					console.log("Now we have the data of user: ", email)
+					callback({ userEmail: email })
+				}
+
+				else {
+					console.log("User Not Found!")
+				}
+			})
 		}, 3000)
 }
 
 // ----------------------------------------------------
 
-function getUserVideos(email, callback, errorMessage) {
+function getUserVideos(email, callback, error) {
 	setTimeout( 
 		() => {
 		callback(usersDB[email])
@@ -28,7 +33,7 @@ function getUserVideos(email, callback, errorMessage) {
 
 // ----------------------------------------------------
 
-function videoDetails(video, callback, errorMessage) {
+function videoDetails(video, callback, error) {
 	setTimeout( 
 		() => {
 		callback(video.title)
@@ -48,11 +53,4 @@ const getPassedUsersFirstVideoTitle = (user) =>
     })
   })
 getPassedUsersFirstVideoTitle("user1@hw.js")
-
-function displayError(errorMessage) {
-  console.error(new Error(errorMessage));
-
-}
-
-
 console.log("Finish");
