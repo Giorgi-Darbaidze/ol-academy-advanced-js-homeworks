@@ -1,13 +1,12 @@
 console.log("Start");
 
 const usersDB = {
-  "user1@hw.js": [{ title: "video1" }, { title: "video2" }],
+  "user1@hw.js": [{ title: 'video1' }, { title: 'video2' }],
   "user2@hw.js": [{ genre: "genre1" }, { genre: "genre1" }],
   "user3@hw.js": [],
 };
 
-function loginUser(email, password, callback, error) {
-	return new Promise(() => {
+function loginUser(email, password, callback, errorMessage) {
   	setTimeout(
 			() => {
 				if (Object.keys(usersDB).includes(email)){
@@ -16,27 +15,38 @@ function loginUser(email, password, callback, error) {
 				}
 
 				else {
-					console.log("User Not Found!")
+					displayError("User Not Found!")
 				}
-			})
-		}, 3000)
-}
-
+			}, 3000)
+		}
+		
 // ----------------------------------------------------
 
-function getUserVideos(email, callback, error) {
+function getUserVideos(email, callback, errorMessage) {
 	setTimeout( 
 		() => {
-		callback(usersDB[email])
+			if (Object.keys(usersDB[email]).includes()) {
+				callback(usersDB[email])
+			}
+
+			else {
+				displayError("Videos not found!")
+			}
 	}, 2000)
 }
 
 // ----------------------------------------------------
 
-function videoDetails(video, callback, error) {
+function videoDetails(video, callback, errorMessage) {
 	setTimeout( 
 		() => {
-		callback(video.title)
+			if (Object.keys(video).includes(String)) {
+				callback(video.title)
+			}
+
+			else {
+				displayError("Video Title not found!")
+			}
 	}, 2000)
 }
 
@@ -53,4 +63,10 @@ const getPassedUsersFirstVideoTitle = (user) =>
     })
   })
 getPassedUsersFirstVideoTitle("user1@hw.js")
+
+// ---------------------------------------------------
+
+function displayError(errorMessage) {
+  console.error(new Error(errorMessage));
+}
 console.log("Finish");
