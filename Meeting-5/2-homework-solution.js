@@ -6,48 +6,60 @@ const usersDB = {
   "user3@hw.js": [],
 };
 
-function loginUser(email, password, callback, errorMessage) {
+function displayError(errorMessage) {
+  console.error(new Error(errorMessage));
+}
+
+function loginUser(email, password, res, rej) {
+	if (Object.keys(usersDB).includes(email)){
   	setTimeout(
 			() => {
-				if (Object.keys(usersDB).includes(email)){
 					console.log("Now we have the data of user: ", email)
-					callback({ userEmail: email })
-				}
+					res({ userEmail: email })
+				}, 3000)
+	}
 
-				else {
-					displayError("User Not Found!")
-				}
-			}, 3000)
-		}
-		
-// ----------------------------------------------------
-
-function getUserVideos(email, callback, errorMessage) {
-	setTimeout( 
-		() => {
-			if (Object.keys(usersDB[email]).includes()) {
-				callback(usersDB[email])
-			}
-
-			else {
-				displayError("Videos not found!")
-			}
-	}, 2000)
+	else {
+		setTimeout(
+			() => {
+				rej("User Not Found!")
+			}, 2000)
+	}
 }
 
 // ----------------------------------------------------
 
-function videoDetails(video, callback, errorMessage) {
-	setTimeout( 
-		() => {
-			if (Object.keys(video).includes(String)) {
-				callback(video.title)
-			}
+function getUserVideos(email, res, rej) {
+  if (usersDB[email].length) {
+    setTimeout(
+			() => {
+      	res(usersDB[email])
+    }, 2000)
+  } 
+	
+	else {
+    setTimeout(
+			() => {
+      	rej("Videos not found!")
+    }, 2000)
+  }
+}
+// ----------------------------------------------------
 
-			else {
-				displayError("Video Title not found!")
-			}
-	}, 2000)
+function videoDetails(video, res, rej) {
+	if (video?.title) {
+		setTimeout( 
+			() => {
+				res(video.title)
+			}, 2000)
+	}
+
+	else {
+		setTimeout(
+			() => {
+				rej("Video Title Not Found!")
+			}, 2000)
+	}
 }
 
 // ----------------------------------------------------
@@ -59,14 +71,13 @@ const getPassedUsersFirstVideoTitle = (user) =>
       console.log("videos: ", videos)
       videoDetails(videos[0], (title) => {
         console.log("title: ", title)
-      })
-    })
-  })
+
+      },(err) => displayError(err))
+    },(err) => displayError(err))
+  },(err) => displayError(err))
+
 getPassedUsersFirstVideoTitle("user1@hw.js")
-
-// ---------------------------------------------------
-
-function displayError(errorMessage) {
-  console.error(new Error(errorMessage));
-}
+getPassedUsersFirstVideoTitle("user2@hw.js")
+getPassedUsersFirstVideoTitle("user3@hw.js")
+getPassedUsersFirstVideoTitle("user4@hw.js")
 console.log("Finish");
