@@ -71,17 +71,13 @@ function videoDetails(video) {
 
 // ----------------------------------------------------
 
-const getPassedUsersFirstVideoTitle = (user) =>
-  loginUser(user, 1234, (user) => {
-    console.log("user: ", user)
-    getUserVideos(user.userEmail, (videos) => {
-      console.log("videos: ", videos)
-      videoDetails(videos[0], (title) => {
-        console.log("title: ", title)
-
-      },(err) => displayError(err))
-    },(err) => displayError(err))
-  },(err) => displayError(err))
+const getPassedUsersFirstVideoTitle = (user) => {
+  loginUser(user, 1234)
+    .then((user) => getUserVideos(user.userEmail))
+    .then((videos) => videoDetails(videos[0]))
+    .then((title) => console.log(title))
+    .catch((error) => displayError(error));
+}
 
 getPassedUsersFirstVideoTitle("user1@hw.js")
 
